@@ -1,0 +1,325 @@
+Categories table-
+# category_id	category_name
+1	electronics
+2	clothing
+3	furniture
+4	groceries
+5	stationery
+
+Suppliers table-
+# supplier_id	supplier_name	phone	location
+101	Tech solutions	9876543210	Hyderabad
+102	Fashion hub	9876543211	Vijayawada
+103	Home essentials	9876543212	Hyderabad
+104	Fresh mart	9876543213	Guntur
+105	Smart suppliers	9876543214	Chennai
+106	Global traders	9876543215	Bengaluru
+107	Infra	9876867583	Vizag
+
+Products table-
+# product
+_id	product_name	price	category_id	supplier_id	stock
+1	Laptop	      55000.00		 1                101	             10
+2	Mobile Phone	18000.00	1	         101	             25
+3	T-Shirt	        450.00	      2                102	             50
+4	Jeans		1200.00		2                 102                8
+5	Office Chair	3500.00		3	         103                5
+6	Dining Table	12000.00	3		 103                0
+7	Rice Bag	800.00		4	         104               40
+8	Cooking Oil	600.00		4	         104               3
+9	Notebook	80.00		5	         105               100
+10	Printer		7500.00		1                 101               4
+11	Water Bottle	300.00		5	         105               20
+
+Orders table-
+# order
+_id	product_id	quantity	order_date	total_amount
+1001	1		    2           2026-01-05	                110000.00
+1002	2		    3            2026-01-10	                54000.00
+1003	3		    5           2026-01-15	                2250.00
+1004	4		    2           2026-02-02	                2400.00
+1005	1		    1            2026-02-10	                55000.00
+1006	5		    2            2026-02-15	                7000.00
+1007	7		    10            2026-03-01	                8000.00
+1008	8		    4            2026-03-05	                2400.00
+1009	2		    2            2026-03-12	                36000.00
+1010	10		    1            2026-03-20	                7500.00
+1011	9		    20            2026-04-01	                1600.00
+1012	11		    5            2026-04-05	                1500.00
+1013	1		    1            2026-04-10	                55000.00
+1014	4		    3            2026-04-15	                3600.00
+
+Stock table-
+# stock
+_id	product_id	quantity_available	last_updated
+1	1	            10	                 2026-04-01
+2	2	            25	                 2026-04-01
+3	3	            50	                 2026-04-01
+4	4	            8	                 2026-04-01
+5	5	            5	                 2026-04-01
+6	6	            0	                 2026-04-01
+7	7	           40	                 2026-04-01
+8	8	           3	                 2026-04-01
+9	9	          100	                 2026-04-01
+10	10	            4	                 2026-04-01
+11	11	           20	                 2026-04-01
+
+
+--Basic queries-
+1.Display products with price greater than 500
+| product_id | product_name | price | category_id | supplier_id | stock |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Laptop | 55000.00 | 1 | 101 | 10 |
+| 2 | Mobile Phone | 18000.00 | 1 | 101 | 25 |
+| 4 | Jeans | 1200.00 | 2 | 102 | 8 |
+| 5 | Office Chair | 3500.00 | 3 | 103 | 5 |
+| 6 | Dining Table | 12000.00 | 3 | 103 | 0 |
+| 7 | Rice Bag | 800.00 | 4 | 104 | 40 |
+| 8 | Cooking Oil | 600.00 | 4 | 104 | 3 |
+| 10 | Printer | 7500.00 | 1 | 101 | 4 |
+
+
+2.Show products with low stock
+# product_id	product_name	price	category_id	supplier_id	stock
+4	Jeans	1200.00	2	102	8
+5	Office Chair	3500.00	3	103	5
+6	Dining Table	12000.00	3	103	0
+8	Cooking Oil	600.00	4	104	3
+10	Printer	7500.00	1	101	4
+
+3.List products by category
+# product_id	product_name	price	category_id	supplier_id	stock
+3	T-Shirt	450.00	2	102	50
+4	Jeans	1200.00	2	102	8
+
+4.Display suppliers from a specific location
+# supplier_id	supplier_name	phone	location
+104	Fresh mart	9876543213	Guntur
+
+
+Joins-
+1.Show product name with category
+# product_name	category_name
+Water Bottle	stationery
+T-Shirt	        clothing
+Rice Bag	groceries
+Printer	        electronics
+Office Chair	furniture
+Notebook	stationery
+Mobile Phone	electronics
+Laptop	        electronics
+Jeans	        clothing
+Dining Table	furniture
+Cooking Oil	groceries
+
+2.Display supplier with their products
+supplier_name   product_name
+Tech solutions	Laptop
+Tech solutions	Mobile Phone
+Tech solutions	Printer
+Smart suppliers	Notebook
+Smart suppliers	Water Bottle
+Home essentials	Office Chair
+Home essentials	Dining Table
+Fresh mart	Rice Bag
+Fresh mart	Cooking Oil
+Fashion hub	T-Shirt
+Fashion hub	Jeans
+
+3.Show order details with product information
+# order_id	product_name	quantity	order_date	total_amount
+1001	Laptop	2	2026-01-05	110000.00
+1005	Laptop	1	2026-02-10	55000.00
+1013	Laptop	1	2026-04-10	55000.00
+1002	Mobile Phone	3	2026-01-10	54000.00
+1009	Mobile Phone	2	2026-03-12	36000.00
+1003	T-Shirt	5	2026-01-15	2250.00
+1004	Jeans	2	2026-02-02	2400.00
+1014	Jeans	3	2026-04-15	3600.00
+1006	Office Chair	2	2026-02-15	7000.00
+1007	Rice Bag	10	2026-03-01	8000.00
+1008	Cooking Oil	4	2026-03-05	2400.00
+1011	Notebook	20	2026-04-01	1600.00
+1010	Printer	1	2026-03-20	7500.00
+1012	Water Bottle	5	2026-04-05	1500.00
+
+--Aggregate
+1.Count total products
+Total_products = 11
+
+2.Find avg from products price
+   avg_product_price = 9039.090909
+3.Calculate total inventory value
+  total_inventory_value = 1127400.00
+4.Find highest price product
+ 
+# product_id	product_name	price	category_id	supplier_id	stock
+1	Laptop	55000.00	1	101	10
+
+
+--Subqueries
+1.Find products that are not ordered
+# product_id	product_name	price	category_id	supplier_id	stock
+6	Dining Table	12000.00	3	103	0
+2.Show products above average price
+# product_id	product_name	price	category_id	supplier_id	stock
+1	Laptop	55000.00	1	101	10
+2	Mobile Phone	18000.00	1	101	25
+6	Dining Table	12000.00	3	103	0
+=>avg_product_price = 9039.090909
+3.Find suppliers with no products
+# supplier_id	supplier_name	phone	location
+106	Global traders	9876543215	Bengaluru
+107	Infra	9876867583	Vizag
+
+--Updates & Deletes
+1.Update product price
+# product_id	product_name	price	category_id	supplier_id	stock
+1	Laptop	6000.00	1	101	10
+2.Update stock quantity
+# product_id	product_name	price	category_id	supplier_id	stock
+4	Jeans	1200.00	2	102	15
+3.
+
+
+
+--Views
+1.Create views for product details
+# product_id	product_name	price	stock	category_name	supplier_name
+1	Laptop	6000.00	10	electronics	Tech solutions
+2	Mobile Phone	18000.00	25	electronics	Tech solutions
+3	T-Shirt	450.00	50	clothing	Fashion hub
+4	Jeans	1200.00	15	clothing	Fashion hub
+5	Office Chair	3500.00	5	furniture	Home essentials
+6	Dining Table	12000.00	0	furniture	Home essentials
+7	Rice Bag	800.00	40	groceries	Fresh mart
+8	Cooking Oil	600.00	3	groceries	Fresh mart
+9	Notebook	80.00	100	stationery	Smart suppliers
+10	Printer	7500.00	4	electronics	Tech solutions
+11	Water Bottle	300.00	20	stationery	Smart suppliers
+
+2.Create view for stock summary(inner join)
+# product_id	product_name	category_name	supplier_name	quantity_available	price
+1	Laptop	electronics	Tech solutions	10	6000.00
+2	Mobile Phone	electronics	Tech solutions	25	20000.00
+3	T-Shirt	clothing	Fashion hub	50	450.00
+4	Jeans	clothing	Fashion hub	8	1200.00
+5	Office Chair	furniture	Home essentials	5	3500.00
+6	Dining Table	furniture	Home essentials	0	12000.00
+7	Rice Bag	groceries	Fresh mart	40	800.00
+8	Cooking Oil	groceries	Fresh mart	3	600.00
+9	Notebook	stationery	Smart suppliers	100	80.00
+10	Printer	electronics	Tech solutions	4	7500.00
+11	Water Bottle	stationery	Smart suppliers	20	300.00
+
+
+
+
+--Stored procedures
+
+1.COALESCE() is used to replace NULL values and return the first non-NULL value from a list of expressions.
+
+Mnemonic: COALESCE = "Choose the first available value." ✅
+
+question-
+Here i inserted keyboard(id=12) as new product
+# product_id	product_name	price	category_id	supplier_id	stock
+1	Laptop	6000.00	1	101	10
+2	Mobile Phone	18000.00	1	101	25
+3	T-Shirt	450.00	2	102	50
+4	Jeans	1200.00	2	102	15
+5	Office Chair	3500.00	3	103	5
+6	Dining Table	12000.00	3	103	0
+7	Rice Bag	800.00	4	104	40
+8	Cooking Oil	600.00	4	104	3
+9	Notebook	80.00	5	105	100
+10	Printer	7500.00	1	101	4
+11	Water Bottle	300.00	5	105	20
+12	Keyboard	900.00	1	101	20
+
+2.
+# product_id	product_name	price	category_id	supplier_id	stock
+2	Mobile Phone	20000.00	1	101	25
+
+3.
+# order_id	product_name	quantity	order_date	total_amount
+1001	Laptop	2	2026-01-05	110000.00
+1002	Mobile Phone	3	2026-01-10	54000.00
+1003	T-Shirt	5	2026-01-15	2250.00
+1004	Jeans	2	2026-02-02	2400.00
+1005	Laptop	1	2026-02-10	55000.00
+1006	Office Chair	2	2026-02-15	7000.00
+1007	Rice Bag	10	2026-03-01	8000.00
+1008	Cooking Oil	4	2026-03-05	2400.00
+1009	Mobile Phone	2	2026-03-12	36000.00
+1010	Printer	1	2026-03-20	7500.00
+1011	Notebook	20	2026-04-01	1600.00
+1012	Water Bottle	5	2026-04-05	1500.00
+1013	Laptop	1	2026-04-10	55000.00
+1014	Jeans	3	2026-04-15	3600.00
+
+4.
+Total_inventory_value
+713800.00
+
+5.
+# product_id	product_name	price	stock
+1	Laptop	6000.00	10
+2	Mobile Phone	20000.00	25
+10	Printer	7500.00	4
+12	Keyboard	900.00	20
+
+
+Reports-
+1.Find the top 5 most sold products
+# product_name	total_sold
+Notebook	20
+Rice Bag	10
+Water Bottle	5
+Mobile Phone	5
+T-Shirt	        5
+
+2.Most active supplier
+# supplier_name	total_orders
+Tech solutions	6
+Fashion hub	3
+Fresh mart	2
+Smart suppliers	2
+Home essentials	1
+
+3.Monthly sales report
+# monthly_sales	total_sales
+1	         166250.00
+2	         64400.00
+3	         53900.00
+4	         61700.00
+
+4.Product generating highest revenue
+# product_name	total_revenue
+Laptop	       220000.00
+Mobile Phone	90000.00
+Rice Bag	8000.00
+Printer	        7500.00
+Office Chair	7000.00
+Jeans	        6000.00
+Cooking Oil	2400.00
+T-Shirt	        2250.00
+Notebook	1600.00
+Water Bottle	1500.00
+
+5.Inventory value analysis
+# category_name	inventory_value
+electronics	608000.00
+clothing	40500.00
+groceries	33800.00
+furniture	17500.00
+stationery	14000.00
+
+6.Low stocks product report
+# product_name	stock	price
+Dining Table	0	12000.00
+Cooking Oil	3	600.00
+Printer	4	7500.00
+Office Chair	5	3500.00
+
+-----------------------------------------------------------------------------++
